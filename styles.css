@@ -156,6 +156,10 @@ body::before {
   margin: 0 auto;
 }
 
+.mobile-break {
+  display: none;
+}
+
 /* Invoice Info Header */
 .invoice-info-header {
   display: center;
@@ -1032,7 +1036,7 @@ body::before {
   /* Date Display - Mais compacto */
   .date-display {
     font-size: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     letter-spacing: 0;
   }
 
@@ -1048,6 +1052,10 @@ body::before {
   .subtitle {
     font-size: 13px;
     line-height: 1.5;
+  }
+
+  .mobile-break {
+    display: inline;
   }
 
   .invoice-info-header {
@@ -1077,10 +1085,22 @@ body::before {
     justify-content: center;
     display: flex;
     align-items: center;
+    box-shadow: 0 0 10px rgba(0, 180, 255, 0.3), 0 0 20px rgba(0, 180, 255, 0.2),
+      0 0 30px rgba(0, 180, 255, 0.1);
+  }
+
+  .btn-action:hover {
+    box-shadow: 0 0 15px rgba(0, 180, 255, 0.4), 0 0 30px rgba(0, 180, 255, 0.3),
+      0 0 45px rgba(0, 180, 255, 0.2);
   }
 
   .btn-secondary {
     gap: 8px;
+    box-shadow: none;
+  }
+
+  .btn-secondary:hover {
+    box-shadow: 0 0 10px rgba(0, 180, 255, 0.2);
   }
 
   .pulse-indicator {
@@ -1089,13 +1109,15 @@ body::before {
   }
 
   .section-header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
     gap: 10px;
   }
 
   .section-title {
     font-size: 18px;
+    margin-bottom: 0;
   }
 
   .status-tag {
