@@ -1026,11 +1026,12 @@ body::before {
     font-size: 13px;
     width: 100%;
     max-width: 200px;
+    margin-bottom: 25px;
   }
 
   /* Date Display - Mais compacto */
   .date-display {
-    font-size: 28px;
+    font-size: 22px;
     margin-bottom: 20px;
     letter-spacing: 0;
   }
@@ -1040,7 +1041,7 @@ body::before {
   }
 
   .title-section h1 {
-    font-size: 26px;
+    font-size: 32px;
     letter-spacing: -0.5px;
   }
 
@@ -1068,8 +1069,10 @@ body::before {
 
   .btn-action {
     width: 100%;
-    padding: 14px 20px;
-    font-size: 14px;
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 13px;
     text-align: center;
     justify-content: center;
     display: flex;
