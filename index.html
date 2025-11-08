@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M2Group - Invoice</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="top-header">
+      <div class="logo-sound">
+        <img src="Logo M2 studio Wh.png" alt="M2 Studio" class="logo-image">
+      </div>
+      <button class="btn-pdf" onclick="window.print()">Gerar PDF</button>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+      <!-- Date Display -->
+      <div class="date-display" id="currentDate">now</div>
+
+      <!-- Title Section -->
+      <div class="title-section">
+        <h1><span class="brand">M2Group</span> - Invoice</h1>
+        <p class="subtitle">
+          Registro oficial de pagamento referente a serviços criativos e de
+          produção.
+        </p>
+      </div>
+
+      <!-- Invoice Info -->
+      <div class="invoice-info-header">
+        <div class="info-row">
+          <span class="label">Empresa:</span>
+          <span class="value" id="clientName">Loading...</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Data:</span>
+          <span class="value" id="invoiceDate">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn-action btn-primary" onclick="processPayment()">
+          Pagar
+        </button>
+        <button class="btn-action btn-secondary" onclick="viewProject()">
+          <span class="pulse-indicator"></span>
+          Ver Projeto
+        </button>
+      </div>
+
+      <!-- Services Section -->
+      <div class="services-section">
+        <div class="section-header">
+          <h2 class="section-title">Serviço:</h2>
+          <span class="status-tag" id="statusTag">Pendente</span>
+        </div>
+
+        <div class="services-container">
+          <div class="services-placeholder">
+            <div class="placeholder-content">
+              <svg
+                class="sheets-icon"
+                width="80"
+                height="80"
+                viewBox="0 0 80 80"
+                fill="none"
+              >
+                <rect
+                  x="15"
+                  y="10"
+                  width="50"
+                  height="60"
+                  rx="4"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                />
+                <line
+                  x1="15"
+                  y1="25"
+                  x2="65"
+                  y2="25"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <line
+                  x1="25"
+                  y1="10"
+                  x2="25"
+                  y2="70"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <line
+                  x1="15"
+                  y1="40"
+                  x2="65"
+                  y2="40"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <line
+                  x1="15"
+                  y1="50"
+                  x2="65"
+                  y2="50"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <line
+                  x1="15"
+                  y1="60"
+                  x2="65"
+                  y2="60"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <line
+                  x1="40"
+                  y1="10"
+                  x2="40"
+                  y2="70"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+                <line
+                  x1="55"
+                  y1="10"
+                  x2="55"
+                  y2="70"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+              </svg>
+              <h3>Carregar Planilha Sheets</h3>
+              <p>
+                Os dados da invoice serão carregados automaticamente do Google
+                Sheets
+              </p>
+              <button class="btn-load-sheets" onclick="fetchInvoiceData()">
+                <span>📊</span> Conectar ao Google Sheets
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Content (will be populated by JavaScript) -->
+          <div
+            class="services-content"
+            id="servicesContent"
+            style="display: none"
+          >
+            <!-- Items Table -->
+            <table class="items-table">
+              <thead>
+                <tr>
+                  <th>Descrição</th>
+                  <th>Quantidade</th>
+                  <th>Valor Unit.</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="itemsTableBody">
+                <!-- Items will be loaded here -->
+              </tbody>
+            </table>
+
+            <!-- Totals -->
+            <div class="totals-grid">
+              <div class="total-item">
+                <span class="total-label">Subtotal:</span>
+                <span class="total-value" id="subtotal">R$ 0,00</span>
+              </div>
+              <div class="total-item">
+                <span class="total-label"
+                  >Impostos (<span id="taxRate">0</span>%):</span
+                >
+                <span class="total-value" id="taxAmount">R$ 0,00</span>
+              </div>
+              <div class="total-item">
+                <span class="total-label">Desconto:</span>
+                <span class="total-value" id="discount">R$ 0,00</span>
+              </div>
+              <div class="total-item total-final">
+                <span class="total-label">Total:</span>
+                <span class="total-value" id="totalAmount">R$ 0,00</span>
+              </div>
+            </div>
+
+            <!-- Additional Details -->
+            <div class="details-section">
+              <div class="detail-card">
+                <h4>Informações do Projeto</h4>
+                <p><strong>Nome:</strong> <span id="projectName">-</span></p>
+                <p>
+                  <strong>Descrição:</strong>
+                  <span id="projectDescription">-</span>
+                </p>
+              </div>
+
+              <div class="detail-card">
+                <h4>Dados da Empresa</h4>
+                <p><strong>Nome:</strong> <span id="companyName">-</span></p>
+                <p><strong>Email:</strong> <span id="companyEmail">-</span></p>
+                <p>
+                  <strong>Telefone:</strong> <span id="companyPhone">-</span>
+                </p>
+              </div>
+
+              <div class="detail-card">
+                <h4>Informações de Pagamento</h4>
+                <p><strong>Banco:</strong> <span id="bankName">-</span></p>
+                <p><strong>Titular:</strong> <span id="accountName">-</span></p>
+                <p><strong>Conta:</strong> <span id="accountNumber">-</span></p>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div class="notes-box">
+              <h4>Observações</h4>
+              <p id="invoiceNotes">-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bottom-footer">
+      <div class="footer-logo">
+        <img src="Logo M2 studio Wh.png" alt="M2 Studio" class="logo-image-small">
+        <span>/M2Group.pro</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
