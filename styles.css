@@ -506,25 +506,13 @@ body::before {
 
 .total-final {
   padding-top: 15px;
-  border-top: 1px solid rgba(0, 255, 136, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-size: 18px;
-  box-shadow: 0 8px 30px rgba(0, 255, 136, 0.15);
-  background: radial-gradient(
-    circle,
-    rgba(0, 255, 136, 0.08) 0%,
-    rgba(0, 0, 0, 0) 70%
-  );
 }
 
 .total-final .total-value {
-  color: #00ff88;
+  color: #ffffffe6;
   font-weight: 700;
-  text-shadow: 0 0 12px rgba(0, 255, 136, 0.6),
-    0 0 24px rgba(0, 255, 136, 0.3);
-}
-
-.total-final .total-label {
-  color: rgba(0, 255, 136, 0.85);
 }
 
 /* Details Section */
