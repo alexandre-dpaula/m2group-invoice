@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Helvetica Neue";
   background: linear-gradient(
@@ -16,8 +21,10 @@ body {
   );
   color: #ffffff;
   min-height: 100vh;
+  min-height: -webkit-fill-available;
   position: relative;
   overflow-x: hidden;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 body::before {
@@ -1013,6 +1020,7 @@ body::before {
 
   .top-header {
     padding: 15px;
+    padding-top: max(15px, env(safe-area-inset-top));
     flex-direction: row;
     gap: 12px;
     justify-content: space-between;
